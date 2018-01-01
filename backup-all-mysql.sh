@@ -126,7 +126,7 @@ do
         /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS $db $tables 2>$ERRORFILE 1>>$TMPFILE  || \
 	    cat $ERRORFILE | tee --append $ERRORFILELASTRUN
 	    # cat $ERRORFILE  | mail -s "Error from $0: DB backup of $db failed" $ERROREMAILTO
-        nice bzip2 -c -9 < $TMPFILE > $DBDUMPSDIR/mysqldump_$db.sql.bz2
+#        nice bzip2 -c -9 < $TMPFILE > $DBDUMPSDIR/mysqldump_$db.sql.bz2
 done
 
 if [ $TOTAL -eq 1 ]; then
