@@ -137,7 +137,7 @@ if [ $TOTAL -eq 1 ]; then
         # /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS --all-databases >$TMPFILE 2>&1 || \
 	# neu
 	echo "SET NAMES 'utf8';" > $TMPFILE
-        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS --all-databases  2>$ERRORFILE >>$TMPFILE || \
+        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS --all-databases  2>$ERRORFILE >>$DBDUMPSDIR/$TMPFILE || \
 	    cat $ERRORFILE | tee --append $ERRORFILELASTRUN
 	    #cat $ERRORFILE  | mail -s "Error from $0: DB backup of ALL failed" $ERROREMAILTO
         cat $TMPFILE | bzip2 -c -9 > $DBDUMPSDIR/mysqldump_all_databases.sql.bz2
