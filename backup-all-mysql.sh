@@ -123,7 +123,7 @@ do
         #/usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS $db $tables >$TMPFILE 2>&1 || \
 	# CON-catenieren!
         echo "SET NAMES 'utf8';" > $TMPFILE
-        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS $db $tables 2>$ERRORFILE 1>>$db.sql  || \
+        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS $db $tables 2>$ERRORFILE 1>>$DBDUMPSDIR/$db.sql  || \
 	    cat $ERRORFILE | tee --append $ERRORFILELASTRUN
 	    # cat $ERRORFILE  | mail -s "Error from $0: DB backup of $db failed" $ERROREMAILTO
 #        nice bzip2 -c -9 < $TMPFILE > $DBDUMPSDIR/mysqldump_$db.sql.bz2
@@ -137,7 +137,7 @@ if [ $TOTAL -eq 1 ]; then
         # /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS --all-databases >$TMPFILE 2>&1 || \
 	# neu
 	echo "SET NAMES 'utf8';" > $TMPFILE
-        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS --all-databases  2>$ERRORFILE >>$DBDUMPSDIR/$TMPFILE || \
+        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS --all-databases  2>$ERRORFILE >>$TMPFILE || \
 	    cat $ERRORFILE | tee --append $ERRORFILELASTRUN
 	    #cat $ERRORFILE  | mail -s "Error from $0: DB backup of ALL failed" $ERROREMAILTO
         cat $TMPFILE | bzip2 -c -9 > $DBDUMPSDIR/mysqldump_all_databases.sql.bz2
