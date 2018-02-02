@@ -123,7 +123,7 @@ do
         #/usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS $db $tables >$TMPFILE 2>&1 || \
 	# CON-catenieren!
         echo "SET NAMES 'utf8';" > $TMPFILE
-        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS $db $tables 2>$ERRORFILE 1>>$TMPFILE  || \
+        /usr/bin/mysqldump $MYSQL_CONNECTION_PARAMS $MYSQLOPTS $db $tables 2>$ERRORFILE 1>>$db.sql  || \
 	    cat $ERRORFILE | tee --append $ERRORFILELASTRUN
 	    # cat $ERRORFILE  | mail -s "Error from $0: DB backup of $db failed" $ERROREMAILTO
 #        nice bzip2 -c -9 < $TMPFILE > $DBDUMPSDIR/mysqldump_$db.sql.bz2
